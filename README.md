@@ -4,11 +4,6 @@ This repository is an independent, runnable reconstruction of the method describ
 *Exploiting mutation-driven pocket remodeling for therapeutic discovery in
 osimertinib-resistant non-small cell lung cancer*.
 
-It is **not the authors' unreleased source code**. The manuscript points to
-`https://github.com/YongtaoQian/PertaBind`, but that repository was not publicly
-accessible when this package was assembled (2026-09-21). Parameters stated explicitly
-in the manuscript are preserved; missing implementation details are exposed as
-configuration values rather than silently presented as reported settings.
 
 ## What is implemented
 
