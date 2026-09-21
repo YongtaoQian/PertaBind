@@ -1,13 +1,5 @@
 # PertaBind Reproduction Notes
 
-## Reproduction status
-
-This package is an independent, end-to-end reconstruction based on the manuscript's
-Methods section and Figure 1B. It is not a mirror of the authors' original source code.
-The GitHub URL given in the manuscript was not publicly accessible when this package was
-prepared, so the original class structure, tensor dimensions, data-cleaning code, and
-random seeds could not be verified.
-
 ## Settings explicitly reported in the manuscript
 
 - Inputs: protein sequence, an ESMFold-predicted apo-like structure, a holo
