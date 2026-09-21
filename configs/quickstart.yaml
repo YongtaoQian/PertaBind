@@ -1,0 +1,41 @@
+seed: 2026
+device: cpu
+deterministic: true
+output_dir: runs_quickstart
+data:
+  index: data/processed/index.csv
+  folds: data/processed/folds.csv
+  task: affinity
+  num_workers: 0
+  max_sequence_length: 512
+  resistance_threshold: 1.36
+model:
+  hidden_dim: 64
+  num_rbf: 12
+  protein_layers: 2
+  ligand_layers: 2
+  atom_layers: 2
+  sequence_layers: 1
+  sequence_heads: 4
+  dropout: 0.1
+  protein_cutoff: 12.0
+  atom_cutoff: 5.0
+  shells: [4.0, 6.0, 8.0]
+loss:
+  lambda_rank: 0.2
+  lambda_align: 0.1
+  lambda_distill: 0.5
+  lambda_teacher: 1.0
+  distill_prediction_weight: 1.0
+  distill_representation_weight: 1.0
+  ranking_margin: 0.0
+stage1: {epochs: 1, learning_rate: 0.0001, batch_size: 2, weight_decay: 0.01}
+stage2: {epochs: 1, learning_rate: 0.0005, batch_size: 2, weight_decay: 0.01}
+optimizer:
+  name: AdamW
+  betas: [0.9, 0.999]
+  grad_clip: 5.0
+  scheduler_patience: 2
+  scheduler_factor: 0.5
+early_stopping: {patience: 2, min_delta: 0.0, monitor: rmse}
+

@@ -1,0 +1,61 @@
+# Values explicitly stated in the manuscript are tagged [paper]. Other values are
+# reconstruction defaults and must not be interpreted as author-supplied hyperparameters.
+seed: 2026                         # reconstruction default
+device: auto
+deterministic: true
+output_dir: runs
+
+data:
+  index: data/processed/index.csv
+  folds: data/processed/folds.csv
+  task: affinity                  # affinity | ddg
+  num_workers: 4
+  max_sequence_length: 2048
+  resistance_threshold: 1.36     # kcal/mol [paper]
+
+model:
+  hidden_dim: 192                 # reconstruction default
+  num_rbf: 24                     # reconstruction default
+  protein_layers: 4               # reconstruction default
+  ligand_layers: 4                # reconstruction default
+  atom_layers: 4                  # reconstruction default
+  sequence_layers: 2              # reconstruction default
+  sequence_heads: 8               # reconstruction default
+  dropout: 0.15                   # reconstruction default
+  protein_cutoff: 12.0            # reconstruction default, Angstrom
+  atom_cutoff: 5.0                # reconstruction default, Angstrom
+  shells: [4.0, 6.0, 8.0]        # [paper], Angstrom
+
+loss:
+  lambda_rank: 0.20               # reconstruction default
+  lambda_align: 0.10              # reconstruction default
+  lambda_distill: 0.50            # reconstruction default
+  lambda_teacher: 1.00            # reconstruction default
+  distill_prediction_weight: 1.0  # equation 18
+  distill_representation_weight: 1.0
+  ranking_margin: 0.0
+
+stage1:
+  epochs: 20                      # reconstruction default
+  learning_rate: 1.0e-4           # [paper]
+  batch_size: 8                   # [paper]
+  weight_decay: 1.0e-2            # reconstruction default
+
+stage2:
+  epochs: 80                      # reconstruction default
+  learning_rate: 5.0e-4           # [paper]
+  batch_size: 32                  # [paper]
+  weight_decay: 1.0e-2            # reconstruction default
+
+optimizer:
+  name: AdamW                     # [paper]
+  betas: [0.9, 0.999]             # [paper]
+  grad_clip: 5.0                  # reconstruction default
+  scheduler_patience: 5           # reconstruction default
+  scheduler_factor: 0.5           # reconstruction default
+
+early_stopping:
+  patience: 15                    # reconstruction default
+  min_delta: 0.0
+  monitor: rmse                   # [paper]
+
